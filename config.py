@@ -1,0 +1,1 @@
+BASE_URL = "https://ww3.gogoanime2.org"
