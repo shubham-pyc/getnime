@@ -1,4 +1,3 @@
-from cgitb import reset
 from config import BASE_URL
 import requests
 from bs4 import BeautifulSoup
@@ -20,11 +19,9 @@ def get_anime_list(name):
     list_url = make_list_url(name)
     print(list_url)
     page = requests.get(list_url)
-    print(page)
     ret_value = []
     if page:
         soup = BeautifulSoup(page.content, 'html.parser')
-        print(page)
         episode_li = soup.select("#episode_related .name")
         ret_value = []
         for li in episode_li:
@@ -76,10 +73,12 @@ def get_args():
 
 
 def main():
-    args = get_args()
+    # args = get_args()
+    
     # print(get_path())
-    name = args.anime
-    episode = args.episode
+    name = input("Enter anime name: ")
+    name = name.replace(" ","-")
+    episode = int(input("Enter Episode: "))
     
     if episode <  0:
         episode_list = get_anime_list(name)
