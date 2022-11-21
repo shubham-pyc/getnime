@@ -3,6 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 import re
 import argparse
+from history import get_history
 
 
 # home = requests.get(BASE_URL+"/home")
@@ -73,11 +74,15 @@ def get_args():
 
 
 def main():
+    history = get_history()
     # args = get_args()
     
     # print(get_path())
+    history.display()
+
     name = input("Enter anime name: ")
-    name = name.replace(" ","-")
+    name = name.replace(" ","-").strip().lower()
+    history.add_watched(name)
     episode = int(input("Enter Episode: "))
     
     if episode <  0:
@@ -87,6 +92,7 @@ def main():
 
 
     print(get_anime_url(name, episode))
+    history.save()
 
     # episode_list = get_anime_list(name)
 
